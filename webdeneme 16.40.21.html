@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karahan Optik — Bayrampaşa</title>
+<meta name="description" content="Karahan Optik | Bayrampaşa'da numaralı, numarasız, güneş, spor ve çocuk gözlüğü modelleri. SGK, Bağkur, Emekli Sandığı reçeteleri kabul edilir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17161a;
+    --charcoal:#3c3b3f;
+    --stone:#8d8f8d;
+    --stone-light:#c7c8c5;
+    --oak:#b9855a;
+    --oak-dark:#8e6238;
+    --cream:#f1efe9;
+    --cream-2:#e8e5dd;
+    --paper:#fffdf9;
+    --line: rgba(23,22,26,0.12);
+    --shadow: 0 20px 50px -25px rgba(23,22,26,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--oak-dark);
+    font-weight:700;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 28px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease, color .35s ease;
+  }
+  .btn-primary{background:var(--oak);color:var(--paper);}
+  .btn-primary:hover{background:var(--oak-dark);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(142,98,56,0.55);}
+  .btn-ghost{background:transparent;color:var(--cream);border-color:rgba(241,239,233,0.4);}
+  .btn-ghost:hover{background:rgba(241,239,233,0.12);transform:translateY(-2px);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px);}
+
+  /* ===== NAV ===== */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  .nav.scrolled{
+    background:rgba(241,239,233,0.92);
+    backdrop-filter:blur(10px);
+    padding:14px 40px;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .nav-brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.05rem;letter-spacing:0.02em;color:var(--cream);transition:color .4s ease;}
+  .nav.scrolled .nav-brand{color:var(--ink);}
+  .nav-brand .ko{
+    width:34px;height:34px;border-radius:50%;
+    border:1.4px solid currentColor;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.72rem;font-weight:600;letter-spacing:0.04em;
+  }
+  .nav-logo{
+    height:44px;width:44px;object-fit:cover;border-radius:8px;
+    background:var(--cream);padding:3px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.18);
+  }
+  .nav-links{display:flex;gap:34px;list-style:none;margin:0;padding:0;}
+  .nav-links a{
+    font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;
+    color:var(--cream);opacity:0.85;transition:opacity .3s ease, color .4s ease;
+    position:relative;
+  }
+  .nav.scrolled .nav-links a{color:var(--ink);}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex;align-items:center;gap:16px;}
+  .nav-phone{
+    font-size:0.78rem;font-weight:700;letter-spacing:0.04em;color:var(--cream);
+    transition:color .4s ease;white-space:nowrap;
+  }
+  .nav.scrolled .nav-phone{color:var(--ink);}
+  .nav-toggle{display:none;}
+  @media(max-width:880px){
+    .nav-links{display:none;}
+    .nav{padding:18px 22px;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    background:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    padding:150px 24px 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(185,133,90,0.14), transparent 55%),
+      radial-gradient(ellipse at 82% 85%, rgba(185,133,90,0.10), transparent 50%);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    color:var(--stone-light);font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;
+    font-weight:700;margin-bottom:22px;opacity:0;animation:fadeUp .9s ease .15s forwards;
+  }
+  .hero-eyebrow .dot{color:var(--oak);}
+  .glasses-wrap{
+    width:min(720px,92vw);
+    margin:0 auto 30px;
+    opacity:0;animation:fadeUp 1s ease .3s forwards;
+  }
+  #frameSvg .draw{
+    stroke-dasharray:1 1;
+    stroke-dashoffset:1;
+    animation:drawLine 1.6s cubic-bezier(.65,0,.2,1) forwards;
+  }
+  #frameSvg .draw.d2{animation-delay:.15s;}
+  #frameSvg .draw.d3{animation-delay:.3s;}
+  @keyframes drawLine{to{stroke-dashoffset:0;}}
+  .hero h1{
+    color:var(--cream);
+    font-size:clamp(2.6rem,6vw,4.6rem);
+    line-height:0.98;
+    font-weight:400;
+    opacity:0;animation:fadeUp 1s ease .5s forwards;
+  }
+  .hero h1 em{font-style:italic;color:var(--oak);font-weight:400;}
+  .hero p.sub{
+    max-width:520px;margin:24px auto 0;
+    color:var(--stone-light);
+    font-size:1.02rem;line-height:1.6;
+    opacity:0;animation:fadeUp 1s ease .65s forwards;
+  }
+  .hero-badges{
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:32px;
+    opacity:0;animation:fadeUp 1s ease .8s forwards;
+  }
+  .badge{
+    border:1px solid rgba(241,239,233,0.28);
+    color:var(--stone-light);
+    font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;
+    padding:9px 16px;border-radius:999px;
+  }
+  .hero-cta{
+    display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:38px;
+    opacity:0;animation:fadeUp 1s ease .95s forwards;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .scroll-cue{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    color:var(--stone-light);opacity:0;animation:fadeUp 1s ease 1.2s forwards, bob 2.4s ease-in-out 2.2s infinite;
+    font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+  /* ===== MARQUEE ===== */
+  .marquee-section{background:var(--paper);border-bottom:1px solid var(--line);border-top:1px solid var(--line);padding:26px 0;overflow:hidden;}
+  .marquee-track{display:flex;width:max-content;animation:scroll 32s linear infinite;}
+  .marquee-track span{
+    font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--stone);
+    padding:0 40px;white-space:nowrap;position:relative;
+  }
+  .marquee-track span::after{content:"·";position:absolute;right:0;color:var(--oak);font-style:normal;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ===== SECTION HEADS ===== */
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:400;}
+  .section-head p{color:var(--stone);font-size:1rem;line-height:1.65;margin-top:16px;}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ===== CATEGORIES ===== */
+  .categories{padding:120px 0 100px;}
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cat-card{background:var(--paper);padding:44px 30px;transition:background .4s ease;}
+  .cat-card:hover{background:var(--cream-2);}
+  .cat-icon{width:52px;height:52px;margin-bottom:26px;}
+  .cat-card h3{font-size:1.18rem;font-weight:500;margin-bottom:12px;line-height:1.25;}
+  .cat-card p{color:var(--stone);font-size:0.92rem;line-height:1.6;margin:0;}
+  @media(max-width:980px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cat-grid{grid-template-columns:1fr;}}
+
+  /* ===== ABOUT ===== */
+  .about{padding:40px 0 120px;}
+  .about-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center;}
+  .about-media{position:relative;}
+  .about-media img{border-radius:4px;box-shadow:var(--shadow);width:100%;height:520px;object-fit:cover;}
+  .about-media .tag{
+    position:absolute;bottom:-26px;left:-26px;
+    background:var(--ink);color:var(--cream);
+    padding:20px 26px;border-radius:4px;
+    font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;
+    box-shadow:var(--shadow);
+    max-width:230px;line-height:1.4;
+  }
+  .about-text h2{font-size:clamp(2rem,3.4vw,2.7rem);font-weight:400;margin-bottom:24px;line-height:1.12;}
+  .about-text p{color:var(--charcoal);font-size:1.02rem;line-height:1.75;margin:0 0 18px;}
+  .about-text p:last-of-type{margin-bottom:32px;}
+  .about-stats{display:flex;gap:40px;margin-top:8px;flex-wrap:wrap;}
+  .about-stats div{border-left:2px solid var(--oak);padding-left:16px;}
+  .about-stats .num{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);display:block;}
+  .about-stats .lbl{font-size:0.76rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone);}
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr;gap:60px;}
+    .about-media .tag{position:static;margin-top:18px;max-width:none;}
+    .about-media img{height:380px;}
+  }
+
+  /* ===== KURUM / SGK BAND ===== */
+  .official{background:var(--ink);padding:90px 0;color:var(--cream);}
+  .official-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:center;}
+  .official h2{color:var(--cream);font-size:clamp(1.9rem,3.2vw,2.5rem);font-weight:400;line-height:1.18;}
+  .official p{color:var(--stone-light);line-height:1.7;margin-top:18px;font-size:0.98rem;}
+  .official-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(241,239,233,0.14);}
+  .official-item{
+    background:var(--ink);padding:34px 24px;text-align:center;
+  }
+  .official-item .glyph{
+    width:44px;height:44px;margin:0 auto 16px;border:1.4px solid var(--oak);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--oak);font-family:'Fraunces',serif;font-size:0.95rem;
+  }
+  .official-item span{display:block;font-size:0.86rem;letter-spacing:0.04em;color:var(--cream);font-weight:600;}
+  @media(max-width:860px){
+    .official-inner{grid-template-columns:1fr;}
+    .official-list{grid-template-columns:1fr;}
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery{padding:120px 0;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .gallery-item{position:relative;overflow:hidden;border-radius:4px;box-shadow:var(--shadow);}
+  .gallery-item img{width:100%;height:64vh;max-height:600px;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1);}
+  .gallery-item:hover img{transform:scale(1.05);}
+  .gallery-item .g-cap{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:22px 24px;
+    background:linear-gradient(to top, rgba(23,22,26,0.75), transparent);
+    color:var(--cream);font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;
+  }
+  @media(max-width:760px){
+    .gallery-grid{grid-template-columns:1fr;}
+    .gallery-item img{height:42vh;}
+  }
+
+  /* ===== REVIEWS CTA ===== */
+  .reviews{padding:100px 0;background:var(--cream-2);}
+  .reviews-box{
+    background:var(--paper);border-radius:6px;box-shadow:var(--shadow);
+    padding:64px 40px;text-align:center;max-width:760px;margin:0 auto;
+  }
+  .stars{display:flex;justify-content:center;gap:6px;margin-bottom:22px;}
+  .stars svg{width:22px;height:22px;fill:var(--oak);}
+  .reviews-box h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:400;margin-bottom:14px;}
+  .reviews-box p{color:var(--stone);max-width:460px;margin:0 auto 30px;line-height:1.65;}
+
+  /* ===== LOCATION ===== */
+  .location{padding:120px 0;}
+  .loc-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:0;box-shadow:var(--shadow);border-radius:6px;overflow:hidden;}
+  .loc-info{background:var(--ink);color:var(--cream);padding:56px 46px;}
+  .loc-info h2{color:var(--cream);font-size:1.9rem;font-weight:400;margin-bottom:24px;}
+  .loc-row{display:flex;gap:16px;margin-bottom:26px;align-items:flex-start;}
+  .loc-row .ic{width:20px;height:20px;flex:none;margin-top:3px;color:var(--oak);}
+  .loc-row .tx-label{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone-light);margin-bottom:5px;display:block;}
+  .loc-row .tx-val{font-size:0.98rem;line-height:1.55;color:var(--cream);}
+  .loc-map iframe{width:100%;height:100%;min-height:440px;border:0;display:block;filter:grayscale(0.15) contrast(1.02);}
+  @media(max-width:860px){
+    .loc-grid{grid-template-columns:1fr;}
+    .loc-map iframe{min-height:340px;}
+  }
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink);color:var(--stone-light);padding:70px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;padding-bottom:50px;border-bottom:1px solid rgba(241,239,233,0.14);}
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .footer-brand .ko{width:38px;height:38px;border-radius:50%;border:1.4px solid var(--oak);display:flex;align-items:center;justify-content:center;color:var(--oak);font-family:'Fraunces',serif;font-size:0.8rem;}
+  .footer-brand .name{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--cream);}
+  footer p{line-height:1.7;font-size:0.92rem;max-width:320px;}
+  footer h4{color:var(--cream);font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px;}
+  footer a{font-size:0.94rem;transition:color .3s ease;}
+  footer a:hover{color:var(--oak);}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;font-size:0.8rem;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:var(--stone-light);}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr;}}
+
+  ::selection{background:var(--oak);color:var(--cream);}
+
+  /* ===== RANDEVU BUTONU ===== */
+  .btn-randevu{
+    background:var(--oak);color:var(--paper);border-color:var(--oak);
+  }
+  .btn-randevu:hover{background:var(--oak-dark);border-color:var(--oak-dark);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(142,98,56,0.55);}
+  .nav-randevu-btn{
+    padding:11px 22px;font-size:0.72rem;
+  }
+
+  /* ===== RANDEVU MODAL ===== */
+  .rdv-overlay{
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(23,22,26,0.66);
+    backdrop-filter:blur(3px);
+    display:none;
+    align-items:flex-start;justify-content:center;
+    padding:70px 20px;
+    overflow-y:auto;
+  }
+  .rdv-overlay.open{display:flex;}
+  .rdv-modal{
+    background:var(--paper);
+    width:100%;max-width:560px;
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:40px 36px 34px;
+    position:relative;
+    animation:fadeUp .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .rdv-close{
+    position:absolute;top:18px;right:18px;
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid var(--line);background:transparent;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--charcoal);font-size:1.1rem;line-height:1;
+    transition:background .3s ease, color .3s ease;
+  }
+  .rdv-close:hover{background:var(--ink);color:var(--cream);}
+  .rdv-modal h2{font-size:1.6rem;font-weight:400;margin-bottom:6px;}
+  .rdv-modal .rdv-sub{color:var(--stone);font-size:0.92rem;line-height:1.55;margin-bottom:28px;}
+  .rdv-field{margin-bottom:22px;}
+  .rdv-field label{
+    display:block;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+    font-weight:700;color:var(--oak-dark);margin-bottom:10px;
+  }
+  .rdv-field input[type="text"],
+  .rdv-field input[type="tel"],
+  .rdv-field input[type="date"],
+  .rdv-field select{
+    width:100%;padding:13px 15px;border-radius:6px;
+    border:1.4px solid var(--line);background:var(--cream);
+    font-family:'Manrope',sans-serif;font-size:0.96rem;color:var(--ink);
+    outline:none;transition:border-color .3s ease, background .3s ease;
+  }
+  .rdv-field input:focus,
+  .rdv-field select:focus{border-color:var(--oak);background:var(--paper);}
+
+  .rdv-hours{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+  .rdv-hour-btn{
+    padding:11px 6px;border-radius:6px;
+    border:1.4px solid var(--line);background:var(--cream);
+    font-weight:700;font-size:0.88rem;color:var(--ink);
+    cursor:pointer;transition:all .25s ease;
+  }
+  .rdv-hour-btn:hover{border-color:var(--oak);}
+  .rdv-hour-btn.active{background:var(--oak);border-color:var(--oak);color:var(--paper);}
+
+  .rdv-slots{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+    margin-top:14px;
+    max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .35s ease, opacity .3s ease, margin-top .35s ease;
+  }
+  .rdv-slots.show{max-height:200px;opacity:1;}
+  .rdv-slot-btn{
+    padding:10px 6px;border-radius:6px;
+    border:1.4px solid var(--stone-light);background:var(--paper);
+    font-weight:600;font-size:0.85rem;color:var(--charcoal);
+    cursor:pointer;transition:all .25s ease;
+  }
+  .rdv-slot-btn:hover{border-color:var(--oak);color:var(--oak-dark);}
+  .rdv-slot-btn.active{background:var(--ink);border-color:var(--ink);color:var(--cream);}
+  .rdv-slot-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+  .rdv-selected-info{
+    margin-top:16px;padding:12px 16px;border-radius:6px;
+    background:var(--cream-2);border-left:3px solid var(--oak);
+    font-size:0.88rem;color:var(--charcoal);display:none;
+  }
+  .rdv-selected-info.show{display:block;}
+  .rdv-selected-info b{color:var(--ink);}
+
+  .rdv-error{
+    color:#b0433a;font-size:0.82rem;margin-top:6px;display:none;
+  }
+  .rdv-error.show{display:block;}
+
+  .rdv-submit{
+    width:100%;justify-content:center;margin-top:8px;border:none;
+  }
+
+  /* ===== ONAY EKRANI ===== */
+  .rdv-confirm{display:none;text-align:center;padding:10px 4px 4px;}
+  .rdv-confirm.show{display:block;}
+  .rdv-confirm .rdv-check{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--oak);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 22px;font-size:1.7rem;
+  }
+  .rdv-confirm h3{font-size:1.4rem;font-weight:500;margin-bottom:14px;}
+  .rdv-confirm p{color:var(--charcoal);font-size:1rem;line-height:1.7;max-width:420px;margin:0 auto 26px;}
+  .rdv-confirm p b{color:var(--oak-dark);}
+  .rdv-confirm .btn{margin:0 auto;}
+
+  @media(max-width:480px){
+    .rdv-modal{padding:32px 22px 28px;}
+    .rdv-hours{grid-template-columns:repeat(4,1fr);}
+    .rdv-slots{grid-template-columns:repeat(3,1fr);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+    #frameSvg .draw{stroke-dashoffset:0;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand"><img class="nav-logo" src="resimler/logo.jpg" alt="Karahan Optik logo"> Karahan Optik</div>
+  <ul class="nav-links">
+    <li><a href="#urunler">Ürünler</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#kurumlar">SGK / Bağkur</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#konum">Konum</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="nav-phone" href="tel:+905400982858">0540 098 28 58</a>
+    <button type="button" class="btn btn-randevu nav-randevu-btn" onclick="rdvOpen()">Randevu Al</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-eyebrow">Bayrampaşa <span class="dot">·</span> 2025'de Açıldı</div>
+
+  <div class="glasses-wrap">
+    <svg id="frameSvg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Karahan Optik vitrin ve mağaza içi görselleriyle gözlük çerçevesi illüstrasyonu">
+      <defs>
+        <clipPath id="lensLeft"><rect x="70" y="55" width="300" height="220" rx="46"/></clipPath>
+        <clipPath id="lensRight"><rect x="530" y="55" width="300" height="220" rx="46"/></clipPath>
+      </defs>
+      <rect class="draw d2" x="70" y="55" width="300" height="220" rx="46" fill="none" stroke="#f1efe9" stroke-width="5" pathLength="1"/>
+      <rect class="draw d3" x="530" y="55" width="300" height="220" rx="46" fill="none" stroke="#f1efe9" stroke-width="5" pathLength="1"/>
+      <path class="draw" d="M370,120 C 410,95 490,95 530,120" fill="none" stroke="#f1efe9" stroke-width="5" pathLength="1"/>
+      <path class="draw" d="M70,110 C 30,100 10,105 5,120" fill="none" stroke="#f1efe9" stroke-width="5" pathLength="1"/>
+      <path class="draw" d="M830,110 C 870,100 890,105 895,120" fill="none" stroke="#f1efe9" stroke-width="5" pathLength="1"/>
+    </svg>
+  </div>
+
+  <h1>Yeni yüzünüz,<br><em>Karahan Optik</em>'te.</h1>
+  <p class="sub">Numaralı, numarasız, güneş, spor ve çocuk gözlüklerinde uzman danışmanlık — Bayrampaşa'nın kalbinde, seçkin markalarla.</p>
+
+  <div class="hero-badges">
+    <span class="badge">Numaralı Güneş Gözlüğü</span>
+    <span class="badge">Spor & Özel Tasarım</span>
+    <span class="badge">Çocuk Koleksiyonu</span>
+    <span class="badge">SGK · Bağkur · Emekli Sandığı</span>
+  </div>
+
+  <div class="hero-cta">
+    <button type="button" class="btn btn-randevu" onclick="rdvOpen()">Randevu Al</button>
+    <a class="btn btn-outline" style="border-color:rgba(241,239,233,0.4);color:var(--cream);" href="#konum">Konumu Gör</a>
+    <a class="btn btn-ghost" href="https://instagram.com/karahanoptik" target="_blank" rel="noopener">Instagram'da Takip Et</a>
+  </div>
+
+  <div class="scroll-cue">Keşfet<br>↓</div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span>Ray-Ban</span><span>Emporio Armani</span><span>Vogue</span><span>Michael Kors</span><span>Ossé</span><span>Mustang</span><span>Hawk</span><span>Guess</span><span>Miu Miu</span><span>Armani Exchange</span>
+    <span>Ray-Ban</span><span>Emporio Armani</span><span>Vogue</span><span>Michael Kors</span><span>Ossé</span><span>Mustang</span><span>Hawk</span><span>Guess</span><span>Miu Miu</span><span>Armani Exchange</span>
+  </div>
+</div>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories" id="urunler">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Koleksiyonlar</span>
+      <h2>Her göze, her yaşa uygun bir çerçeve</h2>
+      <p>Numaralı camdan çocuk modellerine, spor tasarımlardan güneş gözlüklerine kadar geniş bir seçki sizi bekliyor.</p>
+    </div>
+
+    <div class="cat-grid reveal">
+      <div class="cat-card">
+        <svg class="cat-icon" viewBox="0 0 52 52" fill="none"><path d="M6 30c0-8 5-13 11-13s11 5 11 13" stroke="#b9855a" stroke-width="2.3" stroke-linecap="round"/><path d="M24 30c0-8 5-13 11-13s11 5 11 13" stroke="#b9855a" stroke-width="2.3" stroke-linecap="round"/><circle cx="17" cy="32" r="7" stroke="#17161a" stroke-width="2.3"/><circle cx="35" cy="32" r="7" stroke="#17161a" stroke-width="2.3"/></svg>
+        <h3>Numaralı Gözlük</h3>
+        <p>Görme kusurunuza özel numaralı camlar ve geniş çerçeve seçenekleri, kişiye özel ölçüm ile hazırlanır.</p>
+      </div>
+      <div class="cat-card">
+        <svg class="cat-icon" viewBox="0 0 52 52" fill="none"><rect x="6" y="20" width="18" height="14" rx="6" fill="#17161a" opacity="0.85"/><rect x="28" y="20" width="18" height="14" rx="6" fill="#17161a" opacity="0.85"/><path d="M24 24h4" stroke="#17161a" stroke-width="2.3"/></svg>
+        <h3>Güneş Gözlüğü</h3>
+        <p>Numaralı ve numarasız güneş gözlüklerinde UV korumalı camlar, sezonun öne çıkan model ve markaları.</p>
+      </div>
+      <div class="cat-card">
+        <svg class="cat-icon" viewBox="0 0 52 52" fill="none"><path d="M9 26l6-10h22l6 10" stroke="#b9855a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="30" r="7" stroke="#17161a" stroke-width="2.3"/><circle cx="36" cy="30" r="7" stroke="#17161a" stroke-width="2.3"/><path d="M23 30h6" stroke="#17161a" stroke-width="2.3"/></svg>
+        <h3>Spor & Özel Tasarım</h3>
+        <p>Aktif yaşam için darbeye dayanıklı spor gözlükleri ve kişiye özel tasarım çerçeve alternatifleri.</p>
+      </div>
+      <div class="cat-card">
+        <svg class="cat-icon" viewBox="0 0 52 52" fill="none"><circle cx="17" cy="28" r="6" stroke="#17161a" stroke-width="2.3"/><circle cx="33" cy="28" r="6" stroke="#17161a" stroke-width="2.3"/><path d="M23 28h4" stroke="#17161a" stroke-width="2.3"/><path d="M13 23c1-4 3-6 4-6M39 23c-1-4-3-6-4-6" stroke="#b9855a" stroke-width="2.3" stroke-linecap="round"/></svg>
+        <h3>Çocuk Gözlükleri</h3>
+        <p>Çocuklara özel numaralı ve numarasız güneş gözlüğü modelleri; dayanıklı, hafif ve renkli çerçeveler.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="hakkimizda">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-media reveal">
+        <img src="resimler/icerden.jpg" alt="Karahan Optik mağaza içi güneş gözlüğü reyonu">
+        <div class="tag">"Aydınlık bir vitrin, güvenilir bir danışmanlık."</div>
+      </div>
+      <div class="about-text reveal">
+        <span class="eyebrow">Hakkımızda</span>
+        <h2>Bayrampaşa'nın yeni gözlük adresi</h2>
+        <p>2025 yılında Bayrampaşa Kamil Caddesi üzerinde kapılarını açan Karahan Optik, modern mağaza tasarımı ve geniş marka portföyüyle hizmet veriyor. Amacımız her müşterimize doğru camı, doğru çerçeveyle buluşturmak.</p>
+        <p>Ray-Ban, Emporio Armani, Vogue, Michael Kors, Guess ve Miu Miu gibi markaların yanı sıra spor, özel tasarım ve çocuk koleksiyonlarını tek çatı altında sunuyoruz.</p>
+        <div class="about-stats">
+          <div><span class="num">10+</span><span class="lbl">Marka Portföyü</span></div>
+          <div><span class="num">4</span><span class="lbl">Koleksiyon Grubu</span></div>
+          <div><span class="num">2025</span><span class="lbl">Açılış Yılı</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFFICIAL / SGK ===== -->
+<section class="official" id="kurumlar">
+  <div class="wrap">
+    <div class="official-inner">
+      <div class="reveal">
+        <span class="eyebrow" style="color:#b9855a;">Resmi Kurum Reçeteleri</span>
+        <h2>SGK, Bağkur ve Emekli Sandığı reçeteleri kabul edilir</h2>
+        <p>Devlet katkılı numaralı gözlük camı ve çerçeve seçenekleriyle, reçetenizle mağazamıza gelmeniz yeterli. Tüm resmi kurum reçeteleri işleme alınır.</p>
+      </div>
+      <div class="official-list reveal">
+        <div class="official-item"><span class="glyph">SGK</span><span>SGK</span></div>
+        <div class="official-item"><span class="glyph">BĞ</span><span>Bağkur</span></div>
+        <div class="official-item"><span class="glyph">ES</span><span>Emekli Sandığı</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="galeri">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Mağazadan Kareler</span>
+      <h2>Vitrinden reyona, Karahan Optik</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <img src="resimler/disaridan.jpg" alt="Karahan Optik mağaza dış cephe ve vitrin">
+        <div class="g-cap">Kamil Caddesi üzerindeki vitrinimiz</div>
+      </div>
+      <div class="gallery-item">
+        <img src="resimler/icerden.jpg" alt="Karahan Optik güneş gözlüğü reyonu">
+        <div class="g-cap">Geniş güneş gözlüğü reyonu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="reviews-box reveal">
+      <div class="stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h2>Deneyiminiz bizim için değerli</h2>
+      <p>2025'de açılan mağazamız için bıraktığınız her yorum, komşularımıza ulaşmamıza yardımcı oluyor. Ziyaretinizden sonra birkaç dakikanızı ayırır mısınız?</p>
+      <a class="btn btn-primary" href="https://www.google.com/maps?cid=3512511201629123255" target="_blank" rel="noopener">Google'da Yorum Bırak</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATION ===== -->
+<section class="location" id="konum">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Bize Ulaşın</span>
+      <h2>Kamil Caddesi'nde, sizi bekliyoruz</h2>
+    </div>
+    <div class="loc-grid reveal">
+      <div class="loc-info">
+        <h2>İletişim</h2>
+        <div class="loc-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div><span class="tx-label">Adres</span><span class="tx-val">Muratpaşa, Kamil Cd. No:161/A,<br>34040 Bayrampaşa / İstanbul</span></div>
+        </div>
+        <div class="loc-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9z"/></svg>
+          <div><span class="tx-label">Telefon</span><span class="tx-val"><a href="tel:+905400982858">0540 098 28 58</a></span></div>
+        </div>
+        <div class="loc-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          <div><span class="tx-label">E-posta</span><span class="tx-val"><a href="mailto:karahanoptik1@gmail.com">karahanoptik1@gmail.com</a></span></div>
+        </div>
+        <div class="loc-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1"/></svg>
+          <div><span class="tx-label">Instagram</span><span class="tx-val"><a href="https://instagram.com/karahanoptik" target="_blank" rel="noopener">@karahanoptik</a></span></div>
+        </div>
+        <a class="btn btn-primary" style="margin-top:10px;" href="https://www.google.com/maps/dir/?api=1&destination=Muratpa%C5%9Fa%2C%20Kamil%20Cd.%20No%3A161%2FA%2C%2034040%20Bayrampa%C5%9Fa%2F%C4%B0stanbul" target="_blank" rel="noopener">Yol Tarifi Al</a>
+      </div>
+      <div class="loc-map">
+        <iframe title="Karahan Optik konum haritası" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Muratpa%C5%9Fa%2C+Kamil+Cd.+No%3A161%2FA%2C+34040+Bayrampa%C5%9Fa%2F%C4%B0stanbul&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="ko">KO</span><span class="name">Karahan Optik</span></div>
+        <p>Bayrampaşa'da numaralı, numarasız, güneş, spor ve çocuk gözlüğü modelleriyle hizmetinizdeyiz. SGK, Bağkur ve Emekli Sandığı reçeteleri kabul edilir.</p>
+      </div>
+      <div>
+        <h4>Keşfet</h4>
+        <ul>
+          <li><a href="#urunler">Ürünler</a></li>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#kurumlar">SGK / Bağkur</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#konum">Konum</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İletişim</h4>
+        <ul>
+          <li><a href="tel:+905400982858">0540 098 28 58</a></li>
+          <li><a href="mailto:karahanoptik1@gmail.com">karahanoptik1@gmail.com</a></li>
+          <li><a href="https://instagram.com/karahanoptik" target="_blank" rel="noopener">@karahanoptik</a></li>
+          <li><a href="https://www.google.com/maps?cid=3512511201629123255" target="_blank" rel="noopener">Google Yorumları</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Karahan Optik — Muratpaşa, Kamil Cd. No:161/A, Bayrampaşa/İstanbul</span>
+      <a href="tel:+905400982858">0540 098 28 58</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== RANDEVU MODAL ===== -->
+<div class="rdv-overlay" id="rdvOverlay">
+  <div class="rdv-modal">
+    <button type="button" class="rdv-close" onclick="rdvClose()" aria-label="Kapat">✕</button>
+
+    <div id="rdvFormWrap">
+      <span class="eyebrow">Karahan Optik</span>
+      <h2>Randevu Al</h2>
+      <p class="rdv-sub">Aşağıdaki bilgileri doldurun, size en uygun saati birlikte belirleyelim.</p>
+
+      <div class="rdv-field">
+        <label for="rdvDate">Tarih</label>
+        <input type="date" id="rdvDate">
+      </div>
+
+      <div class="rdv-field">
+        <label>Saat Aralığı</label>
+        <div class="rdv-hours" id="rdvHours"></div>
+        <div class="rdv-slots" id="rdvSlots"></div>
+        <div class="rdv-selected-info" id="rdvSelectedInfo"></div>
+      </div>
+
+      <div class="rdv-field">
+        <label for="rdvReason">Ne İçin Geleceksiniz?</label>
+        <select id="rdvReason">
+          <option value="">Seçiniz</option>
+          <option value="Numaralı Gözlük Muayenesi">Numaralı Gözlük Muayenesi</option>
+          <option value="Güneş Gözlüğü">Güneş Gözlüğü</option>
+          <option value="Spor / Özel Tasarım Gözlük">Spor / Özel Tasarım Gözlük</option>
+          <option value="Çocuk Gözlüğü">Çocuk Gözlüğü</option>
+          <option value="SGK / Bağkur / Emekli Sandığı Reçetesi">SGK / Bağkur / Emekli Sandığı Reçetesi</option>
+          <option value="Tamir / Bakım">Tamir / Bakım</option>
+          <option value="Diğer">Diğer</option>
+        </select>
+      </div>
+
+      <div class="rdv-field">
+        <label for="rdvName">Ad Soyad</label>
+        <input type="text" id="rdvName" placeholder="Adınız Soyadınız">
+      </div>
+
+      <div class="rdv-field" style="margin-bottom:8px;">
+        <label for="rdvPhone">Telefon Numarası</label>
+        <input type="tel" id="rdvPhone" placeholder="05xx xxx xx xx">
+      </div>
+
+      <div class="rdv-error" id="rdvError">Lütfen tüm alanları eksiksiz doldurun ve bir randevu saati seçin.</div>
+
+      <button type="button" class="btn btn-primary rdv-submit" onclick="rdvSubmit()">Randevu Al</button>
+    </div>
+
+    <div class="rdv-confirm" id="rdvConfirm">
+      <div class="rdv-check">✓</div>
+      <h3>Randevunuz Onaylandı</h3>
+      <p id="rdvConfirmText"></p>
+      <button type="button" class="btn btn-outline" onclick="rdvClose()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive:true });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ===== RANDEVU SİSTEMİ ===== */
+  // Mağaza çalışma saatleri: 09:00 - 19:00 (son randevu 18:45)
+  const RDV_ACIL_SAAT = 9;
+  const RDV_KAPANIS_SAAT = 19;
+
+  let rdvSelectedHour = null;
+  let rdvSelectedTime = null;
+
+  const rdvHoursEl = document.getElementById('rdvHours');
+  const rdvSlotsEl = document.getElementById('rdvSlots');
+  const rdvInfoEl = document.getElementById('rdvSelectedInfo');
+  const rdvDateInput = document.getElementById('rdvDate');
+
+  function rdvPad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function rdvBuildHours(){
+    rdvHoursEl.innerHTML = '';
+    for (let h = RDV_ACIL_SAAT; h < RDV_KAPANIS_SAAT; h++){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rdv-hour-btn';
+      btn.textContent = rdvPad(h) + ':00';
+      btn.onclick = () => rdvSelectHour(h, btn);
+      rdvHoursEl.appendChild(btn);
+    }
+  }
+
+  function rdvSelectHour(hour, btnEl){
+    rdvSelectedHour = hour;
+    rdvSelectedTime = null;
+    rdvInfoEl.classList.remove('show');
+
+    document.querySelectorAll('.rdv-hour-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+
+    const minutes = [0, 15, 30, 45];
+    rdvSlotsEl.innerHTML = '';
+    minutes.forEach(m => {
+      const isLast = (hour === RDV_KAPANIS_SAAT - 1) && m > 45; // güvenlik, hiç tetiklenmez
+      const slotBtn = document.createElement('button');
+      slotBtn.type = 'button';
+      slotBtn.className = 'rdv-slot-btn';
+      slotBtn.textContent = rdvPad(hour) + ':' + rdvPad(m);
+      slotBtn.onclick = () => rdvSelectSlot(hour, m, slotBtn);
+      rdvSlotsEl.appendChild(slotBtn);
+    });
+    rdvSlotsEl.classList.add('show');
+  }
+
+  function rdvSelectSlot(hour, minute, btnEl){
+    rdvSelectedTime = rdvPad(hour) + ':' + rdvPad(minute);
+    document.querySelectorAll('.rdv-slot-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+
+    const dateVal = rdvDateInput.value;
+    const dateTxt = dateVal ? rdvFormatDate(dateVal) : '(tarih seçiniz)';
+    rdvInfoEl.innerHTML = 'Seçilen randevu: <b>' + dateTxt + ' — saat ' + rdvSelectedTime + '</b>';
+    rdvInfoEl.classList.add('show');
+  }
+
+  function rdvFormatDate(dateVal){
+    const parts = dateVal.split('-');
+    if (parts.length !== 3) return dateVal;
+    const gunler = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    const yil = parts[0], ay = parseInt(parts[1], 10), gun = parseInt(parts[2], 10);
+    return gun + ' ' + gunler[ay - 1] + ' ' + yil;
+  }
+
+  function rdvOpen(){
+    document.getElementById('rdvOverlay').classList.add('open');
+    document.getElementById('rdvFormWrap').style.display = 'block';
+    document.getElementById('rdvConfirm').classList.remove('show');
+    document.body.style.overflow = 'hidden';
+
+    // Bugünden itibaren tarih seçilebilsin
+    const today = new Date();
+    const minDate = today.getFullYear() + '-' + rdvPad(today.getMonth() + 1) + '-' + rdvPad(today.getDate());
+    rdvDateInput.min = minDate;
+
+    if (!rdvHoursEl.children.length) rdvBuildHours();
+  }
+
+  function rdvClose(){
+    document.getElementById('rdvOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Overlay dışına tıklayınca kapat
+  document.getElementById('rdvOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'rdvOverlay') rdvClose();
+  });
+
+  async function rdvSubmit(){
+    const dateVal = rdvDateInput.value;
+    const reason = document.getElementById('rdvReason').value;
+    const name = document.getElementById('rdvName').value.trim();
+    const phone = document.getElementById('rdvPhone').value.trim();
+    const errEl = document.getElementById('rdvError');
+
+    if (!dateVal || !rdvSelectedTime || !reason || !name || !phone){
+      errEl.classList.add('show');
+      return;
+    }
+    errEl.classList.remove('show');
+
+    // Randevuyu admin panelin okuyabilmesi için backend'e (appointments.json) kaydet
+    try{
+      await fetch('/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tarih: dateVal,
+          saat: rdvSelectedTime,
+          sebep: reason,
+          ad: name,
+          telefon: phone,
+          durum: 'bekliyor'
+        })
+      });
+    }catch(e){ console.warn('Randevu kaydedilemedi:', e); }
+
+    const dateTxt = rdvFormatDate(dateVal);
+    const confirmText =
+      'Sayın ' + name + ', ' + dateTxt + ' tarihinde saat ' + rdvSelectedTime +
+      ' için "' + reason + '" randevunuz onaylanmıştır. Sizi Karahan Optik\'te ağırlamaktan mutluluk duyarız. ' +
+      'Herhangi bir değişiklik için ' + '0540 098 28 58' + ' numaralı telefondan bize ulaşabilirsiniz.';
+
+    document.getElementById('rdvConfirmText').textContent = confirmText;
+    document.getElementById('rdvFormWrap').style.display = 'none';
+    document.getElementById('rdvConfirm').classList.add('show');
+  }
+</script>
+</body>
+</html>

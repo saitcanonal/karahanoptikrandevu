@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karahan Optik — Yönetim Paneli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17161a;
+    --charcoal:#3c3b3f;
+    --stone:#8d8f8d;
+    --stone-light:#c7c8c5;
+    --oak:#b9855a;
+    --oak-dark:#8e6238;
+    --cream:#f1efe9;
+    --cream-2:#e8e5dd;
+    --paper:#fffdf9;
+    --line: rgba(23,22,26,0.12);
+    --shadow: 0 20px 50px -25px rgba(23,22,26,0.35);
+    --ok:#5c7a5a;
+    --warn:#b9855a;
+    --danger:#b0433a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--oak);color:var(--cream);}
+
+  .eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--oak-dark);
+    font-weight:700;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 26px;border-radius:999px;font-weight:700;font-size:0.8rem;
+    letter-spacing:0.06em;text-transform:uppercase;border:1px solid transparent;
+    cursor:pointer;transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, background .3s ease, color .3s ease;
+    font-family:'Manrope',sans-serif;
+  }
+  .btn-primary{background:var(--oak);color:var(--paper);}
+  .btn-primary:hover{background:var(--oak-dark);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(142,98,56,0.55);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--cream);}
+  .btn-ghost{background:transparent;color:var(--stone);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--oak);color:var(--oak-dark);}
+  .btn-sm{padding:8px 16px;font-size:0.68rem;}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;transform:none !important;box-shadow:none !important;}
+
+  /* ===================== LOGIN ===================== */
+  .login-screen{
+    min-height:100vh;background:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;position:relative;overflow:hidden;
+  }
+  .login-screen::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(185,133,90,0.16), transparent 55%),
+      radial-gradient(ellipse at 82% 85%, rgba(185,133,90,0.12), transparent 50%);
+    pointer-events:none;
+  }
+  .login-card{
+    position:relative;
+    width:100%;max-width:400px;
+    background:var(--paper);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:44px 38px 36px;
+    text-align:center;
+    animation:fadeUp .7s ease;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .login-logo{
+    width:96px;height:96px;border-radius:50%;
+    margin:0 auto 22px;
+    background:var(--cream);
+    border:1.4px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    box-shadow:0 10px 24px -12px rgba(23,22,26,0.25);
+  }
+  .login-logo img{width:100%;height:100%;object-fit:cover;}
+  .login-logo .fallback{
+    font-family:'Fraunces',serif;font-size:1.5rem;color:var(--oak-dark);letter-spacing:0.02em;
+  }
+  .login-card h1{font-size:1.5rem;font-weight:500;margin-bottom:6px;}
+  .login-sub{color:var(--stone);font-size:0.9rem;margin-bottom:30px;}
+  .field{margin-bottom:18px;text-align:left;}
+  .field label{
+    display:block;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
+    font-weight:700;color:var(--oak-dark);margin-bottom:9px;
+  }
+  .field input{
+    width:100%;padding:13px 15px;border-radius:8px;
+    border:1.4px solid var(--line);background:var(--cream);
+    font-family:'Manrope',sans-serif;font-size:0.96rem;color:var(--ink);
+    outline:none;transition:border-color .3s ease, background .3s ease;
+  }
+  .field input:focus{border-color:var(--oak);background:var(--paper);}
+  .login-error{
+    color:var(--danger);font-size:0.82rem;margin:-6px 0 16px;display:none;text-align:left;
+  }
+  .login-error.show{display:block;}
+  .login-btn{width:100%;margin-top:6px;border:none;}
+  .login-hint{
+    margin-top:22px;font-size:0.74rem;color:var(--stone);line-height:1.6;
+    border-top:1px solid var(--line);padding-top:16px;
+  }
+
+  /* ===================== DASHBOARD ===================== */
+  .app{display:none;min-height:100vh;flex-direction:column;}
+  .app.show{display:flex;}
+
+  .topbar{
+    background:var(--ink);color:var(--cream);
+    padding:16px 32px;display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(241,239,233,0.1);
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .logo-circle{
+    width:40px;height:40px;border-radius:50%;overflow:hidden;
+    background:var(--cream);border:1.4px solid rgba(241,239,233,0.3);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .brand .logo-circle img{width:100%;height:100%;object-fit:cover;}
+  .brand .txt{font-family:'Fraunces',serif;font-size:1.05rem;}
+  .brand .txt small{display:block;font-family:'Manrope',sans-serif;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone-light);font-weight:700;margin-top:1px;}
+  .topbar-right{display:flex;align-items:center;gap:16px;}
+  .topbar-right .who{font-size:0.8rem;color:var(--stone-light);}
+  .topbar-right .who b{color:var(--cream);}
+
+  .content{flex:1;padding:36px 32px 60px;max-width:1280px;width:100%;margin:0 auto;}
+
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+  .stat-card{
+    background:var(--paper);border-radius:10px;padding:24px 22px;
+    box-shadow:var(--shadow);border-left:3px solid var(--oak);
+  }
+  .stat-card .num{font-family:'Fraunces',serif;font-size:2rem;color:var(--ink);}
+  .stat-card .lbl{font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone);margin-top:4px;}
+  @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .panel{
+    background:var(--paper);border-radius:12px;box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .panel-head{
+    padding:26px 28px 20px;border-bottom:1px solid var(--line);
+    display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  }
+  .panel-head h2{font-size:1.4rem;font-weight:400;}
+  .panel-head p{color:var(--stone);font-size:0.88rem;margin-top:6px;}
+
+  .toolbar{
+    padding:20px 28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+    background:var(--cream-2);border-bottom:1px solid var(--line);
+  }
+  .toolbar input, .toolbar select{
+    padding:10px 14px;border-radius:8px;border:1.4px solid var(--line);
+    background:var(--paper);font-family:'Manrope',sans-serif;font-size:0.86rem;color:var(--ink);
+    outline:none;transition:border-color .3s ease;
+  }
+  .toolbar input:focus, .toolbar select:focus{border-color:var(--oak);}
+  .toolbar .search{flex:1;min-width:180px;}
+  .toolbar .add-btn{margin-left:auto;}
+
+  table{width:100%;border-collapse:collapse;}
+  thead th{
+    text-align:left;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--oak-dark);font-weight:700;padding:14px 18px;border-bottom:1.4px solid var(--line);
+    background:var(--cream);white-space:nowrap;
+  }
+  tbody td{
+    padding:16px 18px;border-bottom:1px solid var(--line);font-size:0.9rem;color:var(--charcoal);
+    vertical-align:middle;
+  }
+  tbody tr:hover{background:var(--cream);}
+  tbody tr:last-child td{border-bottom:none;}
+  .name-cell{font-weight:700;color:var(--ink);}
+  .sub-cell{font-size:0.76rem;color:var(--stone);margin-top:2px;}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:5px 12px;border-radius:999px;font-size:0.7rem;font-weight:700;
+    letter-spacing:0.04em;text-transform:uppercase;
+  }
+  .badge-bekliyor{background:rgba(185,133,90,0.16);color:var(--oak-dark);}
+  .badge-onaylandi{background:rgba(92,122,90,0.16);color:var(--ok);}
+  .badge-tamamlandi{background:rgba(23,22,26,0.08);color:var(--charcoal);}
+  .badge-iptal{background:rgba(176,67,58,0.12);color:var(--danger);}
+
+  select.durum-select{
+    border:1.4px solid var(--line);background:var(--cream);border-radius:6px;
+    padding:7px 10px;font-size:0.78rem;font-family:'Manrope',sans-serif;color:var(--ink);
+    cursor:pointer;
+  }
+
+  .row-actions{display:flex;gap:8px;}
+  .icon-btn{
+    width:32px;height:32px;border-radius:8px;border:1.4px solid var(--line);
+    background:var(--paper);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--charcoal);transition:all .25s ease;font-size:0.9rem;
+  }
+  .icon-btn:hover{border-color:var(--danger);color:var(--danger);background:rgba(176,67,58,0.06);}
+
+  .empty-state{padding:70px 20px;text-align:center;color:var(--stone);}
+  .empty-state .ic{font-size:2.4rem;margin-bottom:16px;color:var(--stone-light);}
+  .empty-state h3{color:var(--charcoal);font-weight:500;margin-bottom:8px;font-size:1.1rem;}
+  .empty-state p{font-size:0.88rem;max-width:360px;margin:0 auto;line-height:1.6;}
+
+  /* ===== YENİ RANDEVU / MODAL ===== */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:200;background:rgba(23,22,26,0.66);
+    backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;
+    padding:70px 20px;overflow-y:auto;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--paper);width:100%;max-width:480px;border-radius:12px;
+    box-shadow:var(--shadow);padding:34px 32px 30px;position:relative;animation:fadeUp .4s ease;
+  }
+  .modal-box h2{font-size:1.3rem;font-weight:500;margin-bottom:22px;}
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;
+    border:1px solid var(--line);background:transparent;cursor:pointer;color:var(--charcoal);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .modal-close:hover{background:var(--ink);color:var(--cream);}
+  .mfield{margin-bottom:16px;}
+  .mfield label{display:block;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:var(--oak-dark);margin-bottom:8px;}
+  .mfield input, .mfield select{
+    width:100%;padding:12px 14px;border-radius:7px;border:1.4px solid var(--line);
+    background:var(--cream);font-family:'Manrope',sans-serif;font-size:0.9rem;color:var(--ink);outline:none;
+  }
+  .mfield input:focus, .mfield select:focus{border-color:var(--oak);background:var(--paper);}
+  .mfield-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .modal-submit{width:100%;border:none;margin-top:6px;}
+
+  .footer-note{
+    text-align:center;padding:26px 20px 10px;color:var(--stone);font-size:0.78rem;
+  }
+
+  @media(max-width:760px){
+    .topbar{padding:14px 18px;}
+    .content{padding:26px 16px 50px;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    tbody tr{
+      background:var(--paper);margin-bottom:14px;border-radius:10px;border:1px solid var(--line);
+      padding:14px 16px;box-shadow:var(--shadow);
+    }
+    tbody td{border:none;padding:6px 0;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+    tbody td::before{content:attr(data-label);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone);font-weight:700;}
+    .toolbar{flex-direction:column;align-items:stretch;}
+    .toolbar .add-btn{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== GİRİŞ EKRANI ===================== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo" id="loginLogo">
+      <img src="resimler/logo.jpg" alt="Karahan Optik logo" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex';">
+      <div class="fallback" id="logoFallback" style="display:none;">KO</div>
+    </div>
+    <span class="eyebrow">Karahan Optik</span>
+    <h1>Yönetim Paneline Giriş</h1>
+    <p class="login-sub">Randevularınızı görüntülemek için giriş yapın.</p>
+
+    <div class="field">
+      <label for="loginUser">Kullanıcı Adı</label>
+      <input type="text" id="loginUser" placeholder="Kullanıcı adınız" autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="loginPass">Şifre</label>
+      <input type="password" id="loginPass" placeholder="Şifreniz" autocomplete="current-password">
+    </div>
+    <div class="login-error" id="loginError">Kullanıcı adı veya şifre hatalı.</div>
+
+    <button type="button" class="btn btn-primary login-btn" onclick="handleLogin()">Giriş Yap</button>
+
+    <div class="login-hint">
+      İlk giriş bilgileri: <b>karahan</b> / <b>karahan2026</b><br>
+      Giriş yaptıktan sonra Ayarlar bölümünden şifrenizi değiştirebilirsiniz.
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PANEL ===================== -->
+<div class="app" id="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-circle">
+        <img src="resimler/logo.jpg" alt="Karahan Optik logo" onerror="this.style.display='none';">
+      </div>
+      <div class="txt">Karahan Optik<small>Yönetim Paneli</small></div>
+    </div>
+    <div class="topbar-right">
+      <span class="who">Hoş geldiniz, <b id="whoName">—</b></span>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="openPassModal()">Şifre Değiştir</button>
+      <button type="button" class="btn btn-outline btn-sm" onclick="handleLogout()">Çıkış Yap</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num" id="statBugun">0</div>
+        <div class="lbl">Bugünkü Randevu</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statBekliyor">0</div>
+        <div class="lbl">Bekleyen</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statOnaylandi">0</div>
+        <div class="lbl">Onaylanan</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statToplam">0</div>
+        <div class="lbl">Toplam Randevu</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Randevular</h2>
+          <p>Web sitenizden alınan ve elle eklediğiniz tüm randevular burada listelenir.</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input type="text" class="search" id="fSearch" placeholder="İsim veya telefon ara...">
+        <input type="date" id="fDate">
+        <select id="fDurum">
+          <option value="">Tüm Durumlar</option>
+          <option value="bekliyor">Bekliyor</option>
+          <option value="onaylandi">Onaylandı</option>
+          <option value="tamamlandi">Tamamlandı</option>
+          <option value="iptal">İptal</option>
+        </select>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="clearFilters()">Filtreyi Temizle</button>
+        <button type="button" class="btn btn-primary btn-sm add-btn" onclick="openAddModal()">+ Randevu Ekle</button>
+      </div>
+
+      <div id="tableWrap">
+        <table id="rdvTable">
+          <thead>
+            <tr>
+              <th>Tarih / Saat</th>
+              <th>Ad Soyad</th>
+              <th>Telefon</th>
+              <th>Sebep</th>
+              <th>Durum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rdvBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState" style="display:none;">
+          <div class="ic">◎</div>
+          <h3>Henüz randevu yok</h3>
+          <p>Web sitenizden yeni bir randevu alındığında burada görünecek. İsterseniz elle de randevu ekleyebilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">Karahan Optik Yönetim Paneli — veriler bu tarayıcıda güvenle saklanır.</div>
+  </div>
+</div>
+
+<!-- ===================== YENİ / DÜZENLE RANDEVU MODAL ===================== -->
+<div class="modal-overlay" id="addOverlay">
+  <div class="modal-box">
+    <button type="button" class="modal-close" onclick="closeAddModal()">✕</button>
+    <h2>Yeni Randevu Ekle</h2>
+    <div class="mfield-row">
+      <div class="mfield">
+        <label>Tarih</label>
+        <input type="date" id="addDate">
+      </div>
+      <div class="mfield">
+        <label>Saat</label>
+        <input type="time" id="addTime">
+      </div>
+    </div>
+    <div class="mfield">
+      <label>Ad Soyad</label>
+      <input type="text" id="addName" placeholder="Adı Soyadı">
+    </div>
+    <div class="mfield">
+      <label>Telefon</label>
+      <input type="tel" id="addPhone" placeholder="05xx xxx xx xx">
+    </div>
+    <div class="mfield">
+      <label>Ne İçin Geleceksiniz?</label>
+      <select id="addReason">
+        <option value="Numaralı Gözlük Muayenesi">Numaralı Gözlük Muayenesi</option>
+        <option value="Güneş Gözlüğü">Güneş Gözlüğü</option>
+        <option value="Spor / Özel Tasarım Gözlük">Spor / Özel Tasarım Gözlük</option>
+        <option value="Çocuk Gözlüğü">Çocuk Gözlüğü</option>
+        <option value="SGK / Bağkur / Emekli Sandığı Reçetesi">SGK / Bağkur / Emekli Sandığı Reçetesi</option>
+        <option value="Tamir / Bakım">Tamir / Bakım</option>
+        <option value="Diğer">Diğer</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary modal-submit" onclick="saveManualAppointment()">Kaydet</button>
+  </div>
+</div>
+
+<!-- ===================== ŞİFRE DEĞİŞTİRME MODAL ===================== -->
+<div class="modal-overlay" id="passOverlay">
+  <div class="modal-box">
+    <button type="button" class="modal-close" onclick="closePassModal()">✕</button>
+    <h2>Şifre Değiştir</h2>
+    <div class="mfield">
+      <label>Mevcut Şifre</label>
+      <input type="password" id="curPass">
+    </div>
+    <div class="mfield">
+      <label>Yeni Şifre</label>
+      <input type="password" id="newPass">
+    </div>
+    <div class="login-error" id="passError">Mevcut şifre hatalı.</div>
+    <button type="button" class="btn btn-primary modal-submit" onclick="changePassword()">Şifreyi Güncelle</button>
+  </div>
+</div>
+
+<script>
+  const RDV_KEY = 'karahanRandevular';
+  const AUTH_KEY = 'karahanAdminAuth';
+  const SESSION_KEY = 'karahanAdminSession';
+
+  // İlk kurulum: varsayılan kullanıcı adı/şifre
+  if(!localStorage.getItem(AUTH_KEY)){
+    localStorage.setItem(AUTH_KEY, JSON.stringify({ user:'karahan', pass:'karahan2026' }));
+  }
+
+  function getAuth(){ return JSON.parse(localStorage.getItem(AUTH_KEY)); }
+
+  async function getAppointments(){
+    try{
+      const res = await fetch('/api/appointments');
+      return await res.json();
+    }catch(e){ console.warn('Randevular alınamadı:', e); return []; }
+  }
+
+  function handleLogin(){
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value;
+    const auth = getAuth();
+    const errEl = document.getElementById('loginError');
+    if(u === auth.user && p === auth.pass){
+      errEl.classList.remove('show');
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('whoName').textContent = auth.user;
+      showApp();
+    } else {
+      errEl.classList.add('show');
+    }
+  }
+
+  function handleLogout(){
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('app').classList.remove('show');
+    document.getElementById('loginPass').value = '';
+  }
+
+  function showApp(){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').classList.add('show');
+    document.getElementById('whoName').textContent = getAuth().user;
+    renderAll();
+  }
+
+  // Sayfa açıldığında oturum kontrolü
+  if(sessionStorage.getItem(SESSION_KEY) === '1'){ showApp(); }
+
+  // Yeni randevular otomatik görünsün diye periyodik yenileme
+  setInterval(() => {
+    if(document.getElementById('app').classList.contains('show')) renderAll();
+  }, 4000);
+
+  // Enter ile giriş
+  document.getElementById('loginPass').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
+  document.getElementById('loginUser').addEventListener('keydown', e=>{ if(e.key==='Enter') handleLogin(); });
+
+  /* ---------- ŞİFRE DEĞİŞTİRME ---------- */
+  function openPassModal(){ document.getElementById('passOverlay').classList.add('open'); }
+  function closePassModal(){
+    document.getElementById('passOverlay').classList.remove('open');
+    document.getElementById('curPass').value = '';
+    document.getElementById('newPass').value = '';
+    document.getElementById('passError').classList.remove('show');
+  }
+  function changePassword(){
+    const cur = document.getElementById('curPass').value;
+    const neu = document.getElementById('newPass').value;
+    const auth = getAuth();
+    if(cur !== auth.pass){
+      document.getElementById('passError').classList.add('show');
+      return;
+    }
+    if(!neu){ return; }
+    auth.pass = neu;
+    localStorage.setItem(AUTH_KEY, JSON.stringify(auth));
+    closePassModal();
+    alert('Şifreniz güncellendi.');
+  }
+
+  /* ---------- RANDEVU LİSTESİ ---------- */
+  function fmtTarih(d){
+    if(!d) return '—';
+    const parts = d.split('-');
+    if(parts.length!==3) return d;
+    const aylar=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+    return parts[2]+' '+aylar[parseInt(parts[1],10)-1]+' '+parts[0];
+  }
+
+  function durumLabel(d){
+    return { bekliyor:'Bekliyor', onaylandi:'Onaylandı', tamamlandi:'Tamamlandı', iptal:'İptal' }[d] || d;
+  }
+
+  async function renderAll(){
+    const list = (await getAppointments()).sort((a,b)=>{
+      const ta = (a.tarih||'')+' '+(a.saat||''); const tb = (b.tarih||'')+' '+(b.saat||'');
+      return ta.localeCompare(tb);
+    });
+
+    // filtreler
+    const search = document.getElementById('fSearch').value.trim().toLowerCase();
+    const fDate = document.getElementById('fDate').value;
+    const fDurum = document.getElementById('fDurum').value;
+
+    const filtered = list.filter(r=>{
+      if(search && !((r.ad||'').toLowerCase().includes(search) || (r.telefon||'').includes(search))) return false;
+      if(fDate && r.tarih !== fDate) return false;
+      if(fDurum && r.durum !== fDurum) return false;
+      return true;
+    });
+
+    const body = document.getElementById('rdvBody');
+    body.innerHTML = '';
+
+    document.getElementById('emptyState').style.display = filtered.length ? 'none' : 'block';
+    document.getElementById('rdvTable').style.display = filtered.length ? 'table' : 'none';
+
+    filtered.forEach(r=>{
+      const tr = document.createElement('tr');
+
+      const durum = r.durum || 'bekliyor';
+      tr.innerHTML = `
+        <td data-label="Tarih / Saat"><b>${fmtTarih(r.tarih)}</b><div class="sub-cell">${r.saat||''}</div></td>
+        <td data-label="Ad Soyad" class="name-cell">${escapeHtml(r.ad||'')}</td>
+        <td data-label="Telefon">${escapeHtml(r.telefon||'')}</td>
+        <td data-label="Sebep">${escapeHtml(r.sebep||'')}</td>
+        <td data-label="Durum">
+          <select class="durum-select" onchange="updateDurum('${r.id}', this.value)">
+            <option value="bekliyor" ${durum==='bekliyor'?'selected':''}>Bekliyor</option>
+            <option value="onaylandi" ${durum==='onaylandi'?'selected':''}>Onaylandı</option>
+            <option value="tamamlandi" ${durum==='tamamlandi'?'selected':''}>Tamamlandı</option>
+            <option value="iptal" ${durum==='iptal'?'selected':''}>İptal</option>
+          </select>
+        </td>
+        <td data-label="">
+          <div class="row-actions">
+            <button type="button" class="icon-btn" title="Sil" onclick="deleteAppointment('${r.id}')">🗑</button>
+          </div>
+        </td>
+      `;
+      body.appendChild(tr);
+    });
+
+    // istatistikler
+    const today = new Date();
+    const todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    document.getElementById('statBugun').textContent = list.filter(r=>r.tarih===todayStr).length;
+    document.getElementById('statBekliyor').textContent = list.filter(r=>(r.durum||'bekliyor')==='bekliyor').length;
+    document.getElementById('statOnaylandi').textContent = list.filter(r=>r.durum==='onaylandi').length;
+    document.getElementById('statToplam').textContent = list.length;
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  async function updateDurum(id, val){
+    await fetch('/api/appointments/' + id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ durum: val })
+    });
+    renderAll();
+  }
+
+  async function deleteAppointment(id){
+    if(!confirm('Bu randevuyu silmek istediğinize emin misiniz?')) return;
+    await fetch('/api/appointments/' + id, { method: 'DELETE' });
+    renderAll();
+  }
+
+  ['fSearch','fDate','fDurum'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', renderAll);
+    document.getElementById(id).addEventListener('change', renderAll);
+  });
+
+  function clearFilters(){
+    document.getElementById('fSearch').value='';
+    document.getElementById('fDate').value='';
+    document.getElementById('fDurum').value='';
+    renderAll();
+  }
+
+  /* ---------- MANUEL RANDEVU EKLEME ---------- */
+  function openAddModal(){ document.getElementById('addOverlay').classList.add('open'); }
+  function closeAddModal(){
+    document.getElementById('addOverlay').classList.remove('open');
+    document.getElementById('addDate').value='';
+    document.getElementById('addTime').value='';
+    document.getElementById('addName').value='';
+    document.getElementById('addPhone').value='';
+  }
+
+  async function saveManualAppointment(){
+    const tarih = document.getElementById('addDate').value;
+    const saat = document.getElementById('addTime').value;
+    const ad = document.getElementById('addName').value.trim();
+    const telefon = document.getElementById('addPhone').value.trim();
+    const sebep = document.getElementById('addReason').value;
+
+    if(!tarih || !saat || !ad || !telefon){
+      alert('Lütfen tüm alanları doldurun.');
+      return;
+    }
+
+    await fetch('/api/appointments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tarih, saat, sebep, ad, telefon, durum: 'bekliyor' })
+    });
+    closeAddModal();
+    renderAll();
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(ov=>{
+    ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('open'); });
+  });
+</script>
+</body>
+</html>
